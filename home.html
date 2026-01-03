@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse latest Tamil and English movies of 2025">
+    <title>Movies - CineMax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== PROFESSIONAL COLOR SCHEME ===== */
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --bg-glass: rgba(30, 41, 59, 0.8);
+            --accent: #0ea5e9;
+            --accent-hover: #38bdf8;
+            --accent-light: rgba(14, 165, 233, 0.15);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(148, 163, 184, 0.2);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --gold: #fbbf24;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a2744 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--space-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+        }
+
+        /* Form Controls */
+        .form-control {
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        /* Movies Grid */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .movie-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition), box-shadow var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .movie-poster {
+            position: relative;
+            aspect-ratio: 2/3;
+            overflow: hidden;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+
+        .language-badge {
+            position: absolute;
+            top: var(--space-sm);
+            left: var(--space-sm);
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .imdb-badge {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .movie-info {
+            padding: var(--space-md);
+        }
+
+        .movie-info h3 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-info .meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            position: relative;
+            z-index: 1001;
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            position: relative;
+            height: 350px;
+            background: linear-gradient(to bottom, transparent 60%, var(--bg-secondary));
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-header .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: var(--space-xl);
+            margin-top: -60px;
+            position: relative;
+        }
+
+        .movie-title {
+            font-size: 1.75rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .movie-meta-tags {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-lg);
+        }
+
+        .meta-tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .imdb-rating {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--space-lg);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: var(--space-md) var(--space-lg);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cast Grid */
+        .cast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .cast-item {
+            text-align: center;
+        }
+
+        .cast-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            margin: 0 auto var(--space-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .cast-name {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .cast-role {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        /* Reviews */
+        .review-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+        }
+
+        .review-rating {
+            color: var(--gold);
+        }
+
+        .review-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Theater List */
+        .theater-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .theater-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .theater-info h4 {
+            margin-bottom: 4px;
+        }
+
+        .theater-info .distance {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .showtimes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .showtime-btn {
+            padding: 8px 16px;
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all var(--transition);
+        }
+
+        .showtime-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Chatbot Button */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            border: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition);
+        }
+
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 360px;
+            max-width: calc(100vw - 2rem);
+            height: 480px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+
+        .chatbot-window.hidden {
+            display: none;
+        }
+
+        .chatbot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 600;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .chat-message {
+            max-width: 85%;
+        }
+
+        .chat-message.user {
+            align-self: flex-end;
+        }
+
+        .chat-message.bot {
+            align-self: flex-start;
+        }
+
+        .message-content {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .chat-message.user .message-content {
+            background: var(--accent);
+            color: white;
+        }
+
+        .chat-message.bot .message-content {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .chatbot-input {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .chatbot-input button {
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            background: var(--accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .movies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-header {
+                height: 250px;
+            }
+
+            .cast-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 8h20M2 12h20M2 16h20M6 4v16M10 4v16M14 4v16M18 4v16" />
+                </svg>
+                Cine<span>Max</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html" class="active">Movies</a></li>
+            </ul>
+            <div class="user-avatar" id="userAvatar">U</div>
+        </div>
+    </nav>
+
+    <main class="container" style="padding: 2rem 1rem;">
+        <div class="section-header">
+            <div>
+                <h2>Now Showing</h2>
+                <p style="color: var(--text-secondary);">Tamil & English Movies - 2025</p>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <select id="citySelect" class="form-control">
+                    <option value="">Select City</option>
+                </select>
+                <select id="languageFilter" class="form-control">
+                    <option value="all">All Languages</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="English">English</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="movies-grid" id="moviesGrid"></div>
+    </main>
+
+    <div id="movieModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <button class="chatbot-btn" id="chatbotBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+    </button>
+
+    <div class="chatbot-window hidden" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
+                </svg>
+                CineBot
+            </div>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    Hi! 👋 I'm CineBot. Ask me about movies, theaters, or get suggestions!
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Ask me anything...">
+            <button id="chatSendBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== MOVIE DATA WITH CORRECT POSTERS =====
+        const moviesData = [
+            {
+                id: 1,
+                title: "Vidaamuyarchi",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Action Thriller",
+                duration: "2h 30m",
+                rating: "UA",
+                imdbRating: "6.5",
+                director: "Magizh Thirumeni",
+                story: "A man embarks on a dangerous mission to rescue his wife who has been kidnapped in a foreign country. Racing against time, he must navigate through treacherous obstacles and confront ruthless criminals.",
+                poster: "posters/vidaamuyarchi_poster_1767329508132.png",
+                cast: [
+                    { name: "Ajith Kumar", role: "Lead", initial: "A" },
+                    { name: "Trisha", role: "Lead", initial: "T" },
+                    { name: "Arjun Sarja", role: "Antagonist", initial: "A" },
+                    { name: "Regina Cassandra", role: "Supporting", initial: "R" }
+                ],
+                crew: [
+                    { name: "Magizh Thirumeni", role: "Director" },
+                    { name: "Anirudh Ravichander", role: "Music" },
+                    { name: "Lyca Productions", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "MovieFan", rating: "8/10", text: "Ajith delivers a power-packed performance. The action sequences are top-notch!" },
+                    { name: "CinemaLover", rating: "7/10", text: "Engaging thriller with emotional moments. Trisha shines in her role." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Thug Life",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Gangster Drama",
+                duration: "2h 45m",
+                rating: "A",
+                imdbRating: "4.4",
+                director: "Mani Ratnam",
+                story: "Two generations of a crime family navigate through decades of power struggles, betrayal, and redemption in the underworld of South India.",
+                poster: "posters/thug_life_poster_1767329524157.png",
+                cast: [
+                    { name: "Kamal Haasan", role: "Lead", initial: "K" },
+                    { name: "Silambarasan TR", role: "Lead", initial: "S" },
+                    { name: "Trisha", role: "Lead", initial: "T" },
+                    { name: "Ashok Selvan", role: "Supporting", initial: "A" }
+                ],
+                crew: [
+                    { name: "Mani Ratnam", role: "Director" },
+                    { name: "AR Rahman", role: "Music" },
+                    { name: "Madras Talkies", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "FilmCritic", rating: "5/10", text: "Visually stunning but the story drags in the second half." },
+                    { name: "Reviewer123", rating: "4/10", text: "Expected more from this star-studded cast." }
+                ]
+            },
+            {
+                id: 3,
+                title: "Coolie",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Action",
+                duration: "2h 35m",
+                rating: "UA",
+                imdbRating: "6.0",
+                director: "Lokesh Kanagaraj",
+                story: "Deva, a former coolie union leader, returns to settle scores with those who wronged him and his community. Set in the Lokesh Cinematic Universe.",
+                poster: "posters/coolie_poster_1767329539920.png",
+                cast: [
+                    { name: "Rajinikanth", role: "Deva", initial: "R" },
+                    { name: "Nagarjuna", role: "Antagonist", initial: "N" },
+                    { name: "Shruti Haasan", role: "Lead", initial: "S" },
+                    { name: "Sathyaraj", role: "Supporting", initial: "S" }
+                ],
+                crew: [
+                    { name: "Lokesh Kanagaraj", role: "Director" },
+                    { name: "Anirudh Ravichander", role: "Music" },
+                    { name: "Sun Pictures", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "SuperstarFan", rating: "7/10", text: "Rajini is back with a bang! Lokesh delivers an entertaining mass film." },
+                    { name: "CriticReview", rating: "6/10", text: "Good entertainment value but predictable plot." }
+                ]
+            },
+            {
+                id: 4,
+                title: "Good Bad Ugly",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Action Comedy",
+                duration: "2h 20m",
+                rating: "UA",
+                imdbRating: "6.2",
+                director: "Adhik Ravichandran",
+                story: "A quirky tale of three individuals whose lives intertwine in unexpected ways, leading to chaos, comedy, and action.",
+                poster: "posters/good_bad_ugly_poster_1767329569780.png",
+                cast: [
+                    { name: "Ajith Kumar", role: "Triple Role", initial: "A" },
+                    { name: "Trisha", role: "Lead", initial: "T" },
+                    { name: "Arjun Das", role: "Supporting", initial: "A" }
+                ],
+                crew: [
+                    { name: "Adhik Ravichandran", role: "Director" },
+                    { name: "Devi Sri Prasad", role: "Music" },
+                    { name: "Mythri Movie Makers", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "AKFan", rating: "7/10", text: "Ajith in triple action! Mass entertainment guaranteed." },
+                    { name: "MovieBuff", rating: "6/10", text: "Fun but over-the-top at times." }
+                ]
+            },
+            {
+                id: 5,
+                title: "Retro",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Romance Drama",
+                duration: "2h 25m",
+                rating: "U",
+                imdbRating: "7.0",
+                director: "Karthik Subbaraj",
+                story: "A beautiful love story set across multiple timelines, exploring how love transcends time and circumstances.",
+                poster: "posters/retro_poster_1767329585954.png",
+                cast: [
+                    { name: "Suriya", role: "Lead", initial: "S" },
+                    { name: "Pooja Hegde", role: "Lead", initial: "P" },
+                    { name: "Jayaram", role: "Supporting", initial: "J" }
+                ],
+                crew: [
+                    { name: "Karthik Subbaraj", role: "Director" },
+                    { name: "Santhosh Narayanan", role: "Music" },
+                    { name: "Stone Bench Films", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "RomanceFan", rating: "8/10", text: "Beautiful love story with amazing music!" },
+                    { name: "CinemaReviews", rating: "7/10", text: "Suriya and Pooja's chemistry is magical." }
+                ]
+            },
+            {
+                id: 6,
+                title: "Avatar: Fire and Ash",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Sci-Fi Adventure",
+                duration: "3h 10m",
+                rating: "UA",
+                imdbRating: "7.6",
+                director: "James Cameron",
+                story: "Jake Sully and Neytiri explore the volcanic Fire People territories of Pandora, uncovering ancient secrets and facing new threats.",
+                poster: "posters/avatar_poster_1767329602984.png",
+                cast: [
+                    { name: "Sam Worthington", role: "Jake Sully", initial: "S" },
+                    { name: "Zoe Saldana", role: "Neytiri", initial: "Z" },
+                    { name: "Sigourney Weaver", role: "Dr. Grace", initial: "S" },
+                    { name: "Kate Winslet", role: "Ronal", initial: "K" }
+                ],
+                crew: [
+                    { name: "James Cameron", role: "Director" },
+                    { name: "Simon Franglen", role: "Music" },
+                    { name: "20th Century Studios", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "SciFiFan", rating: "9/10", text: "James Cameron delivers another visual masterpiece!" },
+                    { name: "MovieGeek", rating: "8/10", text: "Pandora never looked more beautiful." }
+                ]
+            },
+            {
+                id: 7,
+                title: "Mission: Impossible - The Final Reckoning",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Action Thriller",
+                duration: "2h 50m",
+                rating: "UA",
+                imdbRating: "7.8",
+                director: "Christopher McQuarrie",
+                story: "Ethan Hunt faces his most dangerous mission yet as he battles the Entity, a rogue AI that threatens global security. This is his final mission.",
+                poster: "posters/mission_impossible_poster_1767329622425.png",
+                cast: [
+                    { name: "Tom Cruise", role: "Ethan Hunt", initial: "T" },
+                    { name: "Hayley Atwell", role: "Grace", initial: "H" },
+                    { name: "Simon Pegg", role: "Benji", initial: "S" },
+                    { name: "Ving Rhames", role: "Luther", initial: "V" }
+                ],
+                crew: [
+                    { name: "Christopher McQuarrie", role: "Director" },
+                    { name: "Lorne Balfe", role: "Music" },
+                    { name: "Paramount Pictures", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "ActionFan", rating: "9/10", text: "Tom Cruise outdoes himself with insane stunts!" },
+                    { name: "CriticChoice", rating: "8/10", text: "A fitting finale for the franchise." }
+                ]
+            },
+            {
+                id: 8,
+                title: "Captain America: Brave New World",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Superhero Action",
+                duration: "2h 25m",
+                rating: "UA",
+                imdbRating: "7.2",
+                director: "Julius Onah",
+                story: "Sam Wilson, the new Captain America, uncovers a global conspiracy linked to President Thaddeus Ross.",
+                poster: "posters/captain_america_poster_1767329652076.png",
+                cast: [
+                    { name: "Anthony Mackie", role: "Sam Wilson", initial: "A" },
+                    { name: "Harrison Ford", role: "President Ross", initial: "H" },
+                    { name: "Danny Ramirez", role: "Joaquin Torres", initial: "D" },
+                    { name: "Liv Tyler", role: "Betty Ross", initial: "L" }
+                ],
+                crew: [
+                    { name: "Julius Onah", role: "Director" },
+                    { name: "Laura Karpman", role: "Music" },
+                    { name: "Marvel Studios", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "MarvelFan", rating: "8/10", text: "Anthony Mackie owns the shield!" },
+                    { name: "SuperheroReview", rating: "7/10", text: "Strong political thriller vibes." }
+                ]
+            },
+            {
+                id: 9,
+                title: "Thunderbolts*",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Superhero Action",
+                duration: "2h 15m",
+                rating: "UA",
+                imdbRating: "7.6",
+                director: "Jake Schreier",
+                story: "A group of morally ambiguous anti-heroes are recruited by the government for dangerous black-ops missions. They become The New Avengers.",
+                poster: "posters/thunderbolts_poster_1767329671118.png",
+                cast: [
+                    { name: "Florence Pugh", role: "Yelena Belova", initial: "F" },
+                    { name: "Sebastian Stan", role: "Bucky Barnes", initial: "S" },
+                    { name: "David Harbour", role: "Red Guardian", initial: "D" },
+                    { name: "Wyatt Russell", role: "US Agent", initial: "W" }
+                ],
+                crew: [
+                    { name: "Jake Schreier", role: "Director" },
+                    { name: "Christophe Beck", role: "Music" },
+                    { name: "Marvel Studios", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "MCUFan", rating: "8/10", text: "Fresh take on the superhero genre!" },
+                    { name: "CinemaCritic", rating: "7/10", text: "Florence Pugh steals every scene." }
+                ]
+            },
+            {
+                id: 10,
+                title: "Jana Nayagan",
+                language: "Tamil",
+                releaseYear: 2025,
+                genre: "Action Drama",
+                duration: "2h 35m",
+                rating: "UA",
+                imdbRating: "N/A",
+                director: "H Vinoth",
+                story: "Thalapathy Vijay's swansong as an actor before entering politics. An action-packed entertainer with strong social messaging.",
+                poster: "posters/jana_nayagan_poster_1767329687662.png",
+                cast: [
+                    { name: "Vijay", role: "Lead", initial: "V" },
+                    { name: "Pooja Hegde", role: "Lead", initial: "P" },
+                    { name: "Bobby Deol", role: "Antagonist", initial: "B" },
+                    { name: "Priyamani", role: "Supporting", initial: "P" }
+                ],
+                crew: [
+                    { name: "H Vinoth", role: "Director" },
+                    { name: "Anirudh Ravichander", role: "Music" },
+                    { name: "KVN Productions", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "VijayFan", rating: "10/10", text: "Thalapathy at his best! A perfect farewell." },
+                    { name: "CinemaReview", rating: "8/10", text: "Mass entertainer with all-round performances." }
+                ]
+            },
+            {
+                id: 11,
+                title: "Mickey 17",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Sci-Fi Comedy",
+                duration: "2h 25m",
+                rating: "UA",
+                imdbRating: "7.3",
+                director: "Bong Joon-ho",
+                story: "Mickey Barnes is an 'expendable' - a disposable employee sent on dangerous missions. When he dies, he's regenerated with his memories. But what happens when two Mickeys exist simultaneously?",
+                poster: "posters/mickey17_poster_1767329707784.png",
+                cast: [
+                    { name: "Robert Pattinson", role: "Mickey 17", initial: "R" },
+                    { name: "Naomi Ackie", role: "Nasha", initial: "N" },
+                    { name: "Steven Yeun", role: "Supporting", initial: "S" },
+                    { name: "Toni Collette", role: "Supporting", initial: "T" }
+                ],
+                crew: [
+                    { name: "Bong Joon-ho", role: "Director" },
+                    { name: "Jung Jae-il", role: "Music" },
+                    { name: "Warner Bros.", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "FilmFan", rating: "8/10", text: "Bong delivers another unique masterpiece!" },
+                    { name: "CriticReview", rating: "7/10", text: "Quirky, funny, and thought-provoking." }
+                ]
+            },
+            {
+                id: 12,
+                title: "The Fantastic Four: First Steps",
+                language: "English",
+                releaseYear: 2025,
+                genre: "Superhero Sci-Fi",
+                duration: "2h 30m",
+                rating: "UA",
+                imdbRating: "7.4",
+                director: "Matt Shakman",
+                story: "Marvel's First Family arrives in the MCU. Set in a retro-futuristic 1960s, the Fantastic Four face Galactus and his herald, the Silver Surfer.",
+                poster: "posters/fantastic_four_poster_1767329726139.png",
+                cast: [
+                    { name: "Pedro Pascal", role: "Reed Richards", initial: "P" },
+                    { name: "Vanessa Kirby", role: "Sue Storm", initial: "V" },
+                    { name: "Joseph Quinn", role: "Johnny Storm", initial: "J" },
+                    { name: "Ebon Moss-Bachrach", role: "Ben Grimm", initial: "E" }
+                ],
+                crew: [
+                    { name: "Matt Shakman", role: "Director" },
+                    { name: "Michael Giacchino", role: "Music" },
+                    { name: "Marvel Studios", role: "Producer" }
+                ],
+                reviews: [
+                    { name: "MarvelFan", rating: "8/10", text: "Finally a great Fantastic Four movie!" },
+                    { name: "ComicLover", rating: "9/10", text: "Pedro Pascal is the perfect Reed Richards." }
+                ]
+            }
+        ];
+
+        const theatersData = {
+            cities: ["Chennai", "Coimbatore", "Madurai", "Trichy", "Salem", "Tirunelveli", "Bangalore", "Hyderabad", "Mumbai", "Delhi"],
+            theaters: [
+                { id: 1, name: "INOX - Phoenix Mall", city: "Chennai", distance: 2.5, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 2, name: "PVR - VR Chennai", city: "Chennai", distance: 4.2, showtimes: ["11:00 AM", "2:30 PM", "6:00 PM", "9:30 PM"] },
+                { id: 3, name: "SPI Sathyam", city: "Chennai", distance: 5.8, showtimes: ["9:30 AM", "1:00 PM", "4:30 PM", "8:00 PM", "11:00 PM"] },
+                { id: 4, name: "AGS Cinemas", city: "Chennai", distance: 6.5, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 5, name: "INOX - Brookefields", city: "Coimbatore", distance: 3.0, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 6, name: "KG Cinemas", city: "Coimbatore", distance: 2.1, showtimes: ["9:30 AM", "1:00 PM", "4:30 PM", "8:00 PM"] },
+                { id: 7, name: "Meenakshi Mall Cinemas", city: "Madurai", distance: 1.8, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 8, name: "PVR - Trichy", city: "Trichy", distance: 2.2, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 9, name: "SRS Cinemas", city: "Salem", distance: 4.0, showtimes: ["10:30 AM", "2:00 PM", "5:30 PM", "9:00 PM"] },
+                { id: 10, name: "INOX - Lulu Mall", city: "Tirunelveli", distance: 3.2, showtimes: ["11:00 AM", "2:30 PM", "6:00 PM", "9:30 PM"] },
+                { id: 11, name: "PVR - Orion Mall", city: "Bangalore", distance: 4.5, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM", "11:30 PM"] },
+                { id: 12, name: "INOX - Mantri Mall", city: "Bangalore", distance: 6.2, showtimes: ["11:00 AM", "2:30 PM", "6:00 PM", "9:30 PM"] },
+                { id: 13, name: "AMB Cinemas", city: "Hyderabad", distance: 5.0, showtimes: ["10:30 AM", "2:00 PM", "5:30 PM", "9:00 PM", "11:00 PM"] },
+                { id: 14, name: "PVR - Phoenix Lower Parel", city: "Mumbai", distance: 2.8, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] },
+                { id: 15, name: "PVR - Select Citywalk", city: "Delhi", distance: 4.0, showtimes: ["10:00 AM", "1:30 PM", "5:00 PM", "9:00 PM"] }
+            ]
+        };
+
+        // Check login
+        const user = JSON.parse(localStorage.getItem('cinemax_user'));
+        if (!user || !user.loggedIn) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+        }
+
+        let movies = moviesData;
+        let theaters = theatersData;
+        let selectedCity = localStorage.getItem('cinemax_city') || '';
+
+        function init() {
+            const citySelect = document.getElementById('citySelect');
+            theaters.cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                if (city === selectedCity) option.selected = true;
+                citySelect.appendChild(option);
+            });
+            renderMovies();
+        }
+
+        function renderMovies() {
+            const grid = document.getElementById('moviesGrid');
+            const languageFilter = document.getElementById('languageFilter').value;
+
+            let filtered = movies.filter(m => m.releaseYear === 2025);
+            if (languageFilter !== 'all') {
+                filtered = filtered.filter(m => m.language === languageFilter);
+            }
+
+            grid.innerHTML = filtered.map(movie => `
+                <div class="movie-card" data-id="${movie.id}">
+                    <div class="movie-poster">
+                        <img src="${movie.poster}" alt="${movie.title}" loading="lazy" 
+                             onerror="this.src='https://via.placeholder.com/300x450/1e293b/0ea5e9?text=${encodeURIComponent(movie.title)}'">
+                        <span class="language-badge">${movie.language}</span>
+                        ${movie.imdbRating && movie.imdbRating !== 'N/A' ? `<span class="imdb-badge">⭐ ${movie.imdbRating}</span>` : ''}
+                    </div>
+                    <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <div class="meta">${movie.genre} • ${movie.duration}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.movie-card').forEach(card => {
+                card.addEventListener('click', () => openMovieModal(parseInt(card.dataset.id)));
+            });
+        }
+
+        function openMovieModal(movieId) {
+            const movie = movies.find(m => m.id === movieId);
+            if (!movie) return;
+
+            selectedCity = document.getElementById('citySelect').value;
+            localStorage.setItem('cinemax_city', selectedCity);
+
+            const cityTheaters = theaters.theaters
+                .filter(t => t.city === selectedCity)
+                .sort((a, b) => a.distance - b.distance);
+
+            const modal = document.getElementById('movieModal');
+            const body = document.getElementById('modalBody');
+
+            body.innerHTML = `
+                <div class="modal-header">
+                    <img src="${movie.poster}" alt="${movie.title}">
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h1 class="movie-title">${movie.title}</h1>
+                    <div class="movie-meta-tags">
+                        <span class="meta-tag">${movie.language}</span>
+                        <span class="meta-tag">${movie.genre}</span>
+                        <span class="meta-tag">${movie.duration}</span>
+                        <span class="meta-tag">${movie.rating}</span>
+                        ${movie.imdbRating && movie.imdbRating !== 'N/A' ? `<span class="meta-tag imdb-rating">⭐ ${movie.imdbRating} IMDB</span>` : ''}
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="overview">Overview</button>
+                        <button class="tab-btn" data-tab="cast">Cast & Crew</button>
+                        <button class="tab-btn" data-tab="reviews">Reviews</button>
+                        <button class="tab-btn" data-tab="showtimes">Book Tickets</button>
+                    </div>
+
+                    <div class="tab-content active" id="tab-overview">
+                        <h3 style="margin-bottom: 1rem;">Storyline</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.8;">${movie.story}</p>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);"><strong>Director:</strong> ${movie.director}</p>
+                    </div>
+
+                    <div class="tab-content" id="tab-cast">
+                        <h3 style="margin-bottom: 1rem;">Cast</h3>
+                        <div class="cast-grid">
+                            ${movie.cast.map(c => `
+                                <div class="cast-item">
+                                    <div class="cast-avatar">${c.initial}</div>
+                                    <div class="cast-name">${c.name}</div>
+                                    <div class="cast-role">${c.role}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <h3 style="margin: 2rem 0 1rem;">Crew</h3>
+                        <div class="cast-grid">
+                            ${movie.crew.map(c => `
+                                <div class="cast-item">
+                                    <div class="cast-avatar">🎬</div>
+                                    <div class="cast-name">${c.name}</div>
+                                    <div class="cast-role">${c.role}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-reviews">
+                        <h3 style="margin-bottom: 1rem;">User Reviews</h3>
+                        ${movie.reviews.map(r => `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="reviewer-name">${r.name}</span>
+                                    <span class="review-rating">⭐ ${r.rating}</span>
+                                </div>
+                                <p class="review-text">${r.text}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="tab-content" id="tab-showtimes">
+                        ${!selectedCity ? `
+                            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                                Please select a city from the dropdown to view theaters
+                            </div>
+                        ` : cityTheaters.length === 0 ? `
+                            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                                No theaters available in ${selectedCity}
+                            </div>
+                        ` : `
+                            <h3 style="margin-bottom: 1rem;">Select Theater & Showtime in ${selectedCity}</h3>
+                            <div class="theater-list">
+                                ${cityTheaters.map(theater => `
+                                    <div class="theater-item">
+                                        <div class="theater-info">
+                                            <h4>${theater.name}</h4>
+                                            <span class="distance">${theater.distance} km away</span>
+                                        </div>
+                                        <div class="showtimes">
+                                            ${theater.showtimes.map(time => `
+                                                <button class="showtime-btn" onclick="selectShowtime(${movie.id}, ${theater.id}, '${time}')">${time}</button>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `}
+                    </div>
+                </div>
+            `;
+
+            // Tab switching
+            body.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    body.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    body.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    body.querySelector(`#tab-${btn.dataset.tab}`).classList.add('active');
+                });
+            });
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('movieModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function selectShowtime(movieId, theaterId, showtime) {
+            const movie = movies.find(m => m.id === movieId);
+            const theater = theaters.theaters.find(t => t.id === theaterId);
+
+            const booking = {
+                movieId, theaterId, showtime,
+                city: selectedCity,
+                movieTitle: movie.title,
+                moviePoster: movie.poster,
+                theaterName: theater.name
+            };
+            localStorage.setItem('cinemax_booking', JSON.stringify(booking));
+            window.location.href = 'booking.html';
+        }
+
+        // Event listeners
+        document.getElementById('languageFilter').addEventListener('change', renderMovies);
+        document.getElementById('citySelect').addEventListener('change', function () {
+            selectedCity = this.value;
+            localStorage.setItem('cinemax_city', selectedCity);
+        });
+
+        document.querySelector('.modal-overlay')?.addEventListener('click', closeModal);
+
+        document.getElementById('userAvatar').addEventListener('click', () => {
+            if (confirm('Do you want to logout?')) {
+                localStorage.removeItem('cinemax_user');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Chatbot
+        const chatbotBtn = document.getElementById('chatbotBtn');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatMessages = document.getElementById('chatbotMessages');
+
+        chatbotBtn.addEventListener('click', () => chatbotWindow.classList.toggle('hidden'));
+        chatbotClose.addEventListener('click', () => chatbotWindow.classList.add('hidden'));
+
+        function sendMessage() {
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+            addMessage(msg, 'user');
+            chatInput.value = '';
+            setTimeout(() => addMessage(processQuery(msg), 'bot'), 500);
+        }
+
+        function addMessage(content, type) {
+            const div = document.createElement('div');
+            div.className = `chat-message ${type}`;
+            div.innerHTML = `<div class="message-content">${content}</div>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function processQuery(q) {
+            q = q.toLowerCase();
+
+            if (q.includes('theater') || q.includes('cinema')) {
+                const city = theaters.cities.find(c => q.includes(c.toLowerCase())) || selectedCity;
+                if (city) {
+                    const list = theaters.theaters.filter(t => t.city === city).sort((a, b) => a.distance - b.distance);
+                    if (list.length) {
+                        return `Theaters in <strong>${city}</strong>:<br>` + list.map(t => `📍 ${t.name} (${t.distance}km)`).join('<br>');
+                    }
+                }
+                return 'Please select a city first.';
+            }
+
+            if (q.includes('action') || q.includes('suggest') || q.includes('recommend')) {
+                const actionMovies = movies.filter(m => m.genre.toLowerCase().includes('action')).slice(0, 3);
+                return 'Action movies:<br>' + actionMovies.map(m => `🎬 <strong>${m.title}</strong> (${m.language})`).join('<br>');
+            }
+
+            if (q.includes('tamil')) {
+                const tamilMovies = movies.filter(m => m.language === 'Tamil').slice(0, 4);
+                return 'Tamil movies:<br>' + tamilMovies.map(m => `🎬 ${m.title} - ⭐${m.imdbRating}`).join('<br>');
+            }
+
+            if (q.includes('english')) {
+                const engMovies = movies.filter(m => m.language === 'English').slice(0, 4);
+                return 'English movies:<br>' + engMovies.map(m => `🎬 ${m.title} - ⭐${m.imdbRating}`).join('<br>');
+            }
+
+            return 'Try asking: "Suggest action movies" or "Theaters in Chennai"';
+        }
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+
+        init();
+    </script>
+</body>
+
+</html>

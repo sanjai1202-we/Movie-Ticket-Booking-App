@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your payment - CineMax">
+    <title>Payment - CineMax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 8h20M2 12h20M2 16h20M6 4v16M10 4v16M14 4v16M18 4v16" />
+                </svg>
+                Cine<span>Max</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Payment Container -->
+    <main class="container">
+        <!-- Payment Form -->
+        <div class="glass-card payment-container" id="paymentSection">
+            <h2 class="text-center" style="margin-bottom: 0.5rem;">Complete Payment</h2>
+            <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Select payment method and complete your booking
+            </p>
+
+            <!-- Order Summary -->
+            <div class="glass-card" style="padding: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.03);">
+                <h4 style="margin-bottom: 1rem;">Order Summary</h4>
+                <div class="summary-row" style="border-bottom-color: rgba(255,255,255,0.05);">
+                    <span id="summaryMovie">Loading...</span>
+                    <span id="summarySeats">-</span>
+                </div>
+                <div class="summary-row" style="border-bottom-color: rgba(255,255,255,0.05);">
+                    <span id="summaryTheater">-</span>
+                    <span id="summaryTime">-</span>
+                </div>
+                <div class="summary-row"
+                    style="font-weight: 700; font-size: 1.25rem; border-bottom: none; padding-top: 1rem;">
+                    <span>Total</span>
+                    <span class="text-accent" id="summaryTotal">₹0</span>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <h4 style="margin-bottom: 1rem;">Payment Method</h4>
+            <div class="payment-methods">
+                <div class="payment-method selected" data-method="card">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="1" y="4" width="22" height="16" rx="2" />
+                        <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                    <div>Card</div>
+                </div>
+                <div class="payment-method" data-method="upi">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M2 12h20" />
+                        <circle cx="12" cy="12" r="4" />
+                    </svg>
+                    <div>UPI</div>
+                </div>
+                <div class="payment-method" data-method="wallet">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                        <path d="M16 12h.01" />
+                    </svg>
+                    <div>Wallet</div>
+                </div>
+            </div>
+
+            <!-- Card Form -->
+            <div id="cardForm">
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456"
+                        maxlength="19">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" class="form-control" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="password" id="cvv" class="form-control" placeholder="•••" maxlength="3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cardName">Cardholder Name</label>
+                    <input type="text" id="cardName" class="form-control" placeholder="Name on card">
+                </div>
+            </div>
+
+            <!-- UPI Form -->
+            <div id="upiForm" class="hidden">
+                <div class="form-group">
+                    <label for="upiId">UPI ID</label>
+                    <input type="text" id="upiId" class="form-control" placeholder="yourname@upi">
+                </div>
+            </div>
+
+            <!-- Wallet Form -->
+            <div id="walletForm" class="hidden">
+                <div class="form-group">
+                    <label for="walletSelect">Select Wallet</label>
+                    <select id="walletSelect" class="form-control">
+                        <option value="">Select a wallet</option>
+                        <option value="paytm">Paytm</option>
+                        <option value="phonepe">PhonePe</option>
+                        <option value="gpay">Google Pay</option>
+                        <option value="amazon">Amazon Pay</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="payBtn">
+                Pay Now
+            </button>
+
+            <a href="booking.html" class="btn btn-secondary mt-lg" style="width: 100%;">
+                ← Back to Seat Selection
+            </a>
+        </div>
+
+        <!-- Success Ticket -->
+        <div class="ticket glass-card hidden" id="ticketSection">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+            </div>
+            <h2>Booking Confirmed!</h2>
+            <p style="color: var(--text-secondary);">Your ticket has been booked successfully</p>
+
+            <div class="ticket-details">
+                <div class="detail-row">
+                    <span class="label">Movie</span>
+                    <span id="ticketMovie">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Theater</span>
+                    <span id="ticketTheater">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Date</span>
+                    <span id="ticketDate">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Time</span>
+                    <span id="ticketTime">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Seats</span>
+                    <span id="ticketSeats">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Booking ID</span>
+                    <span id="ticketId">-</span>
+                </div>
+                <div class="detail-row" style="font-weight: 700;">
+                    <span class="label">Amount Paid</span>
+                    <span class="text-accent" id="ticketAmount">-</span>
+                </div>
+            </div>
+
+            <div class="qr-code">
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                    <!-- Simple QR code pattern -->
+                    <rect fill="#000" x="10" y="10" width="20" height="20" />
+                    <rect fill="#000" x="70" y="10" width="20" height="20" />
+                    <rect fill="#000" x="10" y="70" width="20" height="20" />
+                    <rect fill="#000" x="15" y="15" width="10" height="10" fill="#fff" />
+                    <rect fill="#000" x="75" y="15" width="10" height="10" fill="#fff" />
+                    <rect fill="#000" x="15" y="75" width="10" height="10" fill="#fff" />
+                    <rect fill="#000" x="35" y="10" width="5" height="5" />
+                    <rect fill="#000" x="45" y="15" width="5" height="5" />
+                    <rect fill="#000" x="55" y="10" width="5" height="5" />
+                    <rect fill="#000" x="35" y="35" width="30" height="30" />
+                    <rect fill="#fff" x="40" y="40" width="20" height="20" />
+                    <rect fill="#000" x="45" y="45" width="10" height="10" />
+                    <rect fill="#000" x="10" y="40" width="5" height="5" />
+                    <rect fill="#000" x="20" y="45" width="5" height="5" />
+                    <rect fill="#000" x="85" y="40" width="5" height="5" />
+                    <rect fill="#000" x="80" y="50" width="5" height="5" />
+                    <rect fill="#000" x="40" y="80" width="5" height="5" />
+                    <rect fill="#000" x="50" y="85" width="5" height="5" />
+                    <rect fill="#000" x="60" y="75" width="5" height="5" />
+                    <rect fill="#000" x="75" y="75" width="10" height="10" />
+                </svg>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem;">
+                Show this QR code at the theater entrance
+            </p>
+
+            <a href="home.html" class="btn btn-primary mt-lg" style="width: 100%;">
+                Book Another Movie
+            </a>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // Check login
+        const user = JSON.parse(localStorage.getItem('cinemax_user'));
+        if (!user || !user.loggedIn) {
+            window.location.href = 'login.html';
+        }
+
+        // Get booking
+        const booking = JSON.parse(localStorage.getItem('cinemax_booking'));
+        if (!booking || !booking.seats) {
+            window.location.href = 'home.html';
+        }
+
+        // Populate summary
+        document.getElementById('summaryMovie').textContent = booking.movieTitle;
+        document.getElementById('summarySeats').textContent = booking.seats.length + ' seat(s)';
+        document.getElementById('summaryTheater').textContent = booking.theaterName;
+        document.getElementById('summaryTime').textContent = booking.showtime;
+        document.getElementById('summaryTotal').textContent = '₹' + booking.totalAmount;
+
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const cardForm = document.getElementById('cardForm');
+        const upiForm = document.getElementById('upiForm');
+        const walletForm = document.getElementById('walletForm');
+
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                method.classList.add('selected');
+
+                const type = method.dataset.method;
+                cardForm.classList.toggle('hidden', type !== 'card');
+                upiForm.classList.toggle('hidden', type !== 'upi');
+                walletForm.classList.toggle('hidden', type !== 'wallet');
+            });
+        });
+
+        // Format card number
+        document.getElementById('cardNumber').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+            let formatted = value.match(/.{1,4}/g)?.join(' ') || '';
+            e.target.value = formatted;
+        });
+
+        // Format expiry
+        document.getElementById('expiry').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2);
+            }
+            e.target.value = value;
+        });
+
+        // Pay button
+        document.getElementById('payBtn').addEventListener('click', function () {
+            const btn = this;
+            const selectedMethod = document.querySelector('.payment-method.selected').dataset.method;
+
+            // Simple validation
+            let isValid = true;
+            if (selectedMethod === 'card') {
+                const cardNum = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const expiry = document.getElementById('expiry').value;
+                const cvv = document.getElementById('cvv').value;
+                const name = document.getElementById('cardName').value;
+
+                if (cardNum.length !== 16 || !expiry || cvv.length !== 3 || !name) {
+                    isValid = false;
+                    alert('Please fill all card details correctly');
+                }
+            } else if (selectedMethod === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                if (!upiId.includes('@')) {
+                    isValid = false;
+                    alert('Please enter a valid UPI ID');
+                }
+            } else if (selectedMethod === 'wallet') {
+                const wallet = document.getElementById('walletSelect').value;
+                if (!wallet) {
+                    isValid = false;
+                    alert('Please select a wallet');
+                }
+            }
+
+            if (!isValid) return;
+
+            // Show loading
+            btn.disabled = true;
+            btn.innerHTML = '<div class="loader" style="width: 20px; height: 20px; border-width: 2px; margin: 0 auto;"></div>';
+
+            // Simulate payment processing
+            setTimeout(() => {
+                // Generate booking ID
+                const bookingId = 'CM' + Date.now().toString(36).toUpperCase();
+                booking.bookingId = bookingId;
+                booking.bookingDate = new Date().toLocaleDateString('en-IN', {
+                    weekday: 'short',
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                localStorage.setItem('cinemax_booking', JSON.stringify(booking));
+
+                // Show ticket
+                document.getElementById('paymentSection').classList.add('hidden');
+                document.getElementById('ticketSection').classList.remove('hidden');
+
+                document.getElementById('ticketMovie').textContent = booking.movieTitle;
+                document.getElementById('ticketTheater').textContent = booking.theaterName;
+                document.getElementById('ticketDate').textContent = booking.bookingDate;
+                document.getElementById('ticketTime').textContent = booking.showtime;
+                document.getElementById('ticketSeats').textContent = booking.seats.join(', ');
+                document.getElementById('ticketId').textContent = booking.bookingId;
+                document.getElementById('ticketAmount').textContent = '₹' + booking.totalAmount;
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

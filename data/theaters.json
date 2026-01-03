@@ -1,0 +1,259 @@
+{
+    "cities": [
+        "Chennai",
+        "Coimbatore",
+        "Madurai",
+        "Trichy",
+        "Salem",
+        "Tirunelveli",
+        "Bangalore",
+        "Hyderabad",
+        "Mumbai",
+        "Delhi"
+    ],
+    "theaters": [
+        {
+            "id": 1,
+            "name": "INOX - Phoenix Mall",
+            "city": "Chennai",
+            "distance": 2.5,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "PVR - VR Chennai",
+            "city": "Chennai",
+            "distance": 4.2,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "SPI Sathyam",
+            "city": "Chennai",
+            "distance": 5.8,
+            "showtimes": [
+                "9:30 AM",
+                "1:00 PM",
+                "4:30 PM",
+                "8:00 PM",
+                "11:00 PM"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Rohini Silver Screens",
+            "city": "Chennai",
+            "distance": 8.1,
+            "showtimes": [
+                "10:30 AM",
+                "2:00 PM",
+                "5:30 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "INOX - Brookefields",
+            "city": "Coimbatore",
+            "distance": 3.0,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 6,
+            "name": "PVR - Fun Republic",
+            "city": "Coimbatore",
+            "distance": 5.5,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "KG Cinemas",
+            "city": "Coimbatore",
+            "distance": 2.1,
+            "showtimes": [
+                "9:30 AM",
+                "1:00 PM",
+                "4:30 PM",
+                "8:00 PM"
+            ]
+        },
+        {
+            "id": 8,
+            "name": "Meenakshi Mall Cinemas",
+            "city": "Madurai",
+            "distance": 1.8,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 9,
+            "name": "Sumathi Theatre",
+            "city": "Madurai",
+            "distance": 3.5,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 10,
+            "name": "PVR - Trichy",
+            "city": "Trichy",
+            "distance": 2.2,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 11,
+            "name": "SRS Cinemas",
+            "city": "Salem",
+            "distance": 4.0,
+            "showtimes": [
+                "10:30 AM",
+                "2:00 PM",
+                "5:30 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 12,
+            "name": "INOX - Lulu Mall",
+            "city": "Tirunelveli",
+            "distance": 3.2,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 13,
+            "name": "PVR - Orion Mall",
+            "city": "Bangalore",
+            "distance": 4.5,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM",
+                "11:30 PM"
+            ]
+        },
+        {
+            "id": 14,
+            "name": "INOX - Mantri Mall",
+            "city": "Bangalore",
+            "distance": 6.2,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 15,
+            "name": "PVR - Inorbit Mall",
+            "city": "Hyderabad",
+            "distance": 3.8,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 16,
+            "name": "AMB Cinemas",
+            "city": "Hyderabad",
+            "distance": 5.0,
+            "showtimes": [
+                "10:30 AM",
+                "2:00 PM",
+                "5:30 PM",
+                "9:00 PM",
+                "11:00 PM"
+            ]
+        },
+        {
+            "id": 17,
+            "name": "PVR - Phoenix Lower Parel",
+            "city": "Mumbai",
+            "distance": 2.8,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 18,
+            "name": "INOX - R-City Mall",
+            "city": "Mumbai",
+            "distance": 7.5,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        },
+        {
+            "id": 19,
+            "name": "PVR - Select Citywalk",
+            "city": "Delhi",
+            "distance": 4.0,
+            "showtimes": [
+                "10:00 AM",
+                "1:30 PM",
+                "5:00 PM",
+                "9:00 PM"
+            ]
+        },
+        {
+            "id": 20,
+            "name": "INOX - Nehru Place",
+            "city": "Delhi",
+            "distance": 6.5,
+            "showtimes": [
+                "11:00 AM",
+                "2:30 PM",
+                "6:00 PM",
+                "9:30 PM"
+            ]
+        }
+    ]
+}

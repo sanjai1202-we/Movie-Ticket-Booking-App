@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Select your seats - CineMax">
+    <title>Select Seats - CineMax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 8h20M2 12h20M2 16h20M6 4v16M10 4v16M14 4v16M18 4v16" />
+                </svg>
+                Cine<span>Max</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Movies</a></li>
+            </ul>
+            <div class="user-menu">
+                <div class="user-avatar" id="userAvatar">U</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 2rem 1rem;">
+        <!-- Booking Header -->
+        <div class="glass-card" style="padding: 1.5rem; margin-bottom: 2rem;">
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+                <img id="moviePoster" src="" alt=""
+                    style="width: 80px; height: 120px; object-fit: cover; border-radius: 8px;">
+                <div>
+                    <h2 id="movieTitle">Loading...</h2>
+                    <p style="color: var(--text-secondary);" id="bookingDetails"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seat Selection -->
+        <div class="seat-selection">
+            <div class="screen"></div>
+            <div class="seat-map" id="seatMap">
+                <!-- Seats generated dynamically -->
+            </div>
+            <div class="seat-legend">
+                <div class="legend-item">
+                    <div class="legend-box available"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box selected"></div>
+                    <span>Selected</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box booked"></div>
+                    <span>Booked</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="glass-card booking-summary" id="bookingSummary" style="display: none;">
+            <h3 style="margin-bottom: 1rem;">Booking Summary</h3>
+            <div class="summary-row">
+                <span>Selected Seats</span>
+                <span id="selectedSeats">-</span>
+            </div>
+            <div class="summary-row">
+                <span>Ticket Price</span>
+                <span>₹180 × <span id="seatCount">0</span></span>
+            </div>
+            <div class="summary-row">
+                <span>Convenience Fee</span>
+                <span>₹30</span>
+            </div>
+            <div class="summary-row">
+                <span>Total Amount</span>
+                <span id="totalAmount">₹0</span>
+            </div>
+            <button class="btn btn-primary mt-lg" style="width: 100%;" id="proceedBtn" disabled>
+                Proceed to Payment
+            </button>
+        </div>
+
+        <a href="home.html" class="btn btn-secondary mt-lg" style="display: inline-flex;">
+            ← Back to Movies
+        </a>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // ===== EMBEDDED DATA =====
+        const moviesData = [
+            { id: 1, title: "Vidaamuyarchi", language: "Tamil", releaseYear: 2025, genre: "Action", duration: "2h 30m", rating: "UA", poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop" },
+            { id: 2, title: "Thug Life", language: "Tamil", releaseYear: 2025, genre: "Crime Drama", duration: "2h 45m", rating: "A", poster: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=600&fit=crop" },
+            { id: 3, title: "Coolie", language: "Tamil", releaseYear: 2025, genre: "Action", duration: "2h 35m", rating: "UA", poster: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&h=600&fit=crop" },
+            { id: 4, title: "Good Bad Ugly", language: "Tamil", releaseYear: 2025, genre: "Action Comedy", duration: "2h 20m", rating: "UA", poster: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=600&fit=crop" },
+            { id: 5, title: "Vettaiyan", language: "Tamil", releaseYear: 2025, genre: "Action Thriller", duration: "2h 40m", rating: "UA", poster: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=600&fit=crop" },
+            { id: 6, title: "Avatar 3", language: "English", releaseYear: 2025, genre: "Sci-Fi", duration: "3h 10m", rating: "UA", poster: "https://images.unsplash.com/photo-1534809027769-b00d750a6bac?w=400&h=600&fit=crop" },
+            { id: 7, title: "Mission Impossible 8", language: "English", releaseYear: 2025, genre: "Action", duration: "2h 45m", rating: "UA", poster: "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=400&h=600&fit=crop" },
+            { id: 8, title: "The Batman: Part II", language: "English", releaseYear: 2025, genre: "Action", duration: "2h 55m", rating: "UA", poster: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=400&h=600&fit=crop" },
+            { id: 9, title: "Captain America: Brave New World", language: "English", releaseYear: 2025, genre: "Superhero", duration: "2h 25m", rating: "UA", poster: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&h=600&fit=crop" },
+            { id: 10, title: "Thunderbolts", language: "English", releaseYear: 2025, genre: "Action", duration: "2h 15m", rating: "UA", poster: "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&h=600&fit=crop" },
+            { id: 11, title: "Retro", language: "Tamil", releaseYear: 2025, genre: "Romance", duration: "2h 25m", rating: "U", poster: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=400&h=600&fit=crop" },
+            { id: 12, title: "SK 23", language: "Tamil", releaseYear: 2025, genre: "Action", duration: "2h 30m", rating: "UA", poster: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=600&fit=crop" },
+            { id: 13, title: "Indian 3", language: "Tamil", releaseYear: 2025, genre: "Action Drama", duration: "2h 50m", rating: "UA", poster: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=600&fit=crop" },
+            { id: 14, title: "Jurassic World: Rebirth", language: "English", releaseYear: 2025, genre: "Sci-Fi Adventure", duration: "2h 20m", rating: "UA", poster: "https://images.unsplash.com/photo-1559060017-445fb9722f2a?w=400&h=600&fit=crop" },
+            { id: 15, title: "Thalapathy 69", language: "Tamil", releaseYear: 2025, genre: "Action", duration: "2h 35m", rating: "UA", poster: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=400&h=600&fit=crop" },
+            { id: 16, title: "The Fantastic Four", language: "English", releaseYear: 2025, genre: "Superhero", duration: "2h 30m", rating: "UA", poster: "https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400&h=600&fit=crop" }
+        ];
+
+        const theatersData = {
+            theaters: [
+                { id: 1, name: "INOX - Phoenix Mall", city: "Chennai", distance: 2.5 },
+                { id: 2, name: "PVR - VR Chennai", city: "Chennai", distance: 4.2 },
+                { id: 3, name: "SPI Sathyam", city: "Chennai", distance: 5.8 },
+                { id: 4, name: "Rohini Silver Screens", city: "Chennai", distance: 8.1 },
+                { id: 5, name: "AGS Cinemas", city: "Chennai", distance: 6.5 },
+                { id: 6, name: "INOX - Brookefields", city: "Coimbatore", distance: 3.0 },
+                { id: 7, name: "PVR - Fun Republic", city: "Coimbatore", distance: 5.5 },
+                { id: 8, name: "KG Cinemas", city: "Coimbatore", distance: 2.1 },
+                { id: 9, name: "Meenakshi Mall Cinemas", city: "Madurai", distance: 1.8 },
+                { id: 10, name: "Sumathi Theatre", city: "Madurai", distance: 3.5 },
+                { id: 11, name: "PVR - Trichy", city: "Trichy", distance: 2.2 },
+                { id: 12, name: "SRS Cinemas", city: "Salem", distance: 4.0 },
+                { id: 13, name: "INOX - Lulu Mall", city: "Tirunelveli", distance: 3.2 },
+                { id: 14, name: "PVR - Orion Mall", city: "Bangalore", distance: 4.5 },
+                { id: 15, name: "INOX - Mantri Mall", city: "Bangalore", distance: 6.2 },
+                { id: 16, name: "Cinepolis - Royal Meenakshi", city: "Bangalore", distance: 8.0 },
+                { id: 17, name: "PVR - Inorbit Mall", city: "Hyderabad", distance: 3.8 },
+                { id: 18, name: "AMB Cinemas", city: "Hyderabad", distance: 5.0 },
+                { id: 19, name: "PVR - Phoenix Lower Parel", city: "Mumbai", distance: 2.8 },
+                { id: 20, name: "INOX - R-City Mall", city: "Mumbai", distance: 7.5 },
+                { id: 21, name: "PVR - Select Citywalk", city: "Delhi", distance: 4.0 },
+                { id: 22, name: "INOX - Nehru Place", city: "Delhi", distance: 6.5 }
+            ]
+        };
+
+        // Check login
+        const user = JSON.parse(localStorage.getItem('cinemax_user'));
+        if (!user || !user.loggedIn) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+        }
+
+        // Get booking data
+        const booking = JSON.parse(localStorage.getItem('cinemax_booking'));
+        if (!booking) {
+            window.location.href = 'home.html';
+        }
+
+        let movies = moviesData;
+        let theaters = theatersData;
+        let selectedSeats = [];
+        const TICKET_PRICE = 180;
+        const CONVENIENCE_FEE = 30;
+
+        // Generate random booked seats
+        function generateBookedSeats() {
+            const booked = new Set();
+            const count = Math.floor(Math.random() * 20) + 10;
+            for (let i = 0; i < count; i++) {
+                const row = String.fromCharCode(65 + Math.floor(Math.random() * 8));
+                const seat = Math.floor(Math.random() * 12) + 1;
+                booked.add(`${row}${seat}`);
+            }
+            return booked;
+        }
+
+        const bookedSeats = generateBookedSeats();
+
+        // Initialize
+        function init() {
+            const movie = movies.find(m => m.id === booking.movieId);
+            const theater = theaters.theaters.find(t => t.id === booking.theaterId);
+
+            if (!movie || !theater) {
+                // Try using stored booking info
+                if (booking.movieTitle && booking.theaterName) {
+                    document.getElementById('movieTitle').textContent = booking.movieTitle;
+                    document.getElementById('moviePoster').src = booking.moviePoster || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop';
+                    document.getElementById('moviePoster').alt = booking.movieTitle;
+                    document.getElementById('bookingDetails').innerHTML = `${booking.theaterName} | ${booking.showtime} | ${booking.city}`;
+                    renderSeats();
+                    return;
+                }
+                window.location.href = 'home.html';
+                return;
+            }
+
+            // Update booking with full details
+            booking.movieTitle = movie.title;
+            booking.moviePoster = movie.poster;
+            booking.theaterName = theater.name;
+            localStorage.setItem('cinemax_booking', JSON.stringify(booking));
+
+            document.getElementById('movieTitle').textContent = movie.title;
+            document.getElementById('moviePoster').src = movie.poster;
+            document.getElementById('moviePoster').alt = movie.title;
+            document.getElementById('bookingDetails').innerHTML = `${theater.name} | ${booking.showtime} | ${booking.city}`;
+
+            renderSeats();
+        }
+
+        function renderSeats() {
+            const seatMap = document.getElementById('seatMap');
+            const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+            const seatsPerRow = 12;
+
+            seatMap.innerHTML = rows.map(row => `
+        <div class="seat-row">
+          <span class="row-label">${row}</span>
+          ${Array.from({ length: seatsPerRow }, (_, i) => {
+                const seatNum = i + 1;
+                const seatId = `${row}${seatNum}`;
+                const isBooked = bookedSeats.has(seatId);
+                return `<div class="seat ${isBooked ? 'booked' : ''}" 
+              data-seat="${seatId}" 
+              title="${seatId}">${seatNum}</div>`;
+            }).join('')}
+          <span class="row-label">${row}</span>
+        </div>
+      `).join('');
+
+            // Add click listeners
+            document.querySelectorAll('.seat:not(.booked)').forEach(seat => {
+                seat.addEventListener('click', () => toggleSeat(seat));
+            });
+
+            document.getElementById('bookingSummary').style.display = 'block';
+        }
+
+        function toggleSeat(seatEl) {
+            const seatId = seatEl.dataset.seat;
+
+            if (seatEl.classList.contains('selected')) {
+                seatEl.classList.remove('selected');
+                selectedSeats = selectedSeats.filter(s => s !== seatId);
+            } else {
+                if (selectedSeats.length >= 10) {
+                    alert('Maximum 10 seats can be selected at once');
+                    return;
+                }
+                seatEl.classList.add('selected');
+                selectedSeats.push(seatId);
+            }
+
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const count = selectedSeats.length;
+            const total = count > 0 ? (count * TICKET_PRICE) + CONVENIENCE_FEE : 0;
+
+            document.getElementById('selectedSeats').textContent =
+                count > 0 ? selectedSeats.sort().join(', ') : '-';
+            document.getElementById('seatCount').textContent = count;
+            document.getElementById('totalAmount').textContent = `₹${total}`;
+            document.getElementById('proceedBtn').disabled = count === 0;
+        }
+
+        document.getElementById('proceedBtn').addEventListener('click', () => {
+            if (selectedSeats.length === 0) return;
+
+            booking.seats = selectedSeats.sort();
+            booking.ticketPrice = TICKET_PRICE;
+            booking.convenienceFee = CONVENIENCE_FEE;
+            booking.totalAmount = (selectedSeats.length * TICKET_PRICE) + CONVENIENCE_FEE;
+            localStorage.setItem('cinemax_booking', JSON.stringify(booking));
+
+            window.location.href = 'payment.html';
+        });
+
+        // Logout
+        document.getElementById('userAvatar').addEventListener('click', () => {
+            if (confirm('Do you want to logout?')) {
+                localStorage.removeItem('cinemax_user');
+                window.location.href = 'login.html';
+            }
+        });
+
+        init();
+    </script>
+</body>
+
+</html>

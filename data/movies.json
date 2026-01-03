@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Vidaamuyarchi",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 30m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop",
+    "description": "A gripping action thriller that keeps you on the edge of your seat."
+  },
+  {
+    "id": 2,
+    "title": "Thug Life",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Crime Drama",
+    "duration": "2h 45m",
+    "rating": "A",
+    "poster": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=600&fit=crop",
+    "description": "An epic crime saga spanning decades."
+  },
+  {
+    "id": 3,
+    "title": "Coolie",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 35m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&h=600&fit=crop",
+    "description": "A high-octane action entertainer."
+  },
+  {
+    "id": 4,
+    "title": "Good Bad Ugly",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Action Comedy",
+    "duration": "2h 20m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=600&fit=crop",
+    "description": "A rollercoaster ride of action and comedy."
+  },
+  {
+    "id": 5,
+    "title": "Vettaiyan",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Action Thriller",
+    "duration": "2h 40m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=600&fit=crop",
+    "description": "A powerful action thriller with stellar performances."
+  },
+  {
+    "id": 6,
+    "title": "Avatar 3",
+    "language": "English",
+    "releaseYear": 2025,
+    "genre": "Sci-Fi",
+    "duration": "3h 10m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1534809027769-b00d750a6bac?w=400&h=600&fit=crop",
+    "description": "The next chapter in the groundbreaking Avatar saga."
+  },
+  {
+    "id": 7,
+    "title": "Mission Impossible 8",
+    "language": "English",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 45m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=400&h=600&fit=crop",
+    "description": "Ethan Hunt returns for another impossible mission."
+  },
+  {
+    "id": 8,
+    "title": "The Batman: Part II",
+    "language": "English",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 55m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=400&h=600&fit=crop",
+    "description": "The Dark Knight faces his greatest challenge yet."
+  },
+  {
+    "id": 9,
+    "title": "Captain America: Brave New World",
+    "language": "English",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 25m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&h=600&fit=crop",
+    "description": "Sam Wilson takes on the mantle of Captain America."
+  },
+  {
+    "id": 10,
+    "title": "Thunderbolts",
+    "language": "English",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 15m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&h=600&fit=crop",
+    "description": "A team of anti-heroes unite for a dangerous mission."
+  },
+  {
+    "id": 11,
+    "title": "Retro",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Romance",
+    "duration": "2h 25m",
+    "rating": "U",
+    "poster": "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=400&h=600&fit=crop",
+    "description": "A nostalgic love story set in the 90s."
+  },
+  {
+    "id": 12,
+    "title": "SK 23",
+    "language": "Tamil",
+    "releaseYear": 2025,
+    "genre": "Action",
+    "duration": "2h 30m",
+    "rating": "UA",
+    "poster": "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=600&fit=crop",
+    "description": "A mass entertainer with spectacular action sequences."
+  }
+]
